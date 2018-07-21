@@ -1,0 +1,162 @@
+    \section{ブラックジャックにおける既存の戦略}
+    \subsection{既存の戦略}
+
+        ブラックジャックにおける主な既存の戦略はベーシックストラテジーとカウンティングである。
+
+        ベーシックストラテジーは一回ごとのゲームを想定しており、自分の手札とアップカードのみによって勝率が高い行動を決定する戦略である。そのため、行動を決定するまでに使用されたカードは行動決定に影響せず、残りのカードの予測も行わない。
+
+        また、カウンティングは、ゲームを複数回行ったことで発生する利得を最大にすることを目的とした戦略である。ゲームで使われたカードを記憶し、残りのカードを予測する。そこから自分の有利・不利を決定し掛け金の増減を行うという戦略である。
+        \bunseki{※鳥谷 航大}
+    \subsection{ベーシックストラテジー}
+        ブラックジャックの最も有名な既存の戦略としてベーシックストラテジーという戦略が挙げられる。ベーシックストラテジーは1962年にEdward Thorp氏の書籍『Beat The Dealer: A Winning Strategy for the Game of Twenty One』にて発表された戦略である。元となるアイデアとして、Roger Baldwinらが1956年に発表した「The Optimum Strategy in Blackjack」が使用されている。
+        \bunseki{※鳥谷 航大}
+    \subsection{ベーシックストラテジーの行動決定式}
+        ベーシックストラテジーは以下の前提条件を持つ。
+        \begin{itemize}
+            \item 前提条件\\
+                どのカードを引く確率も13分の1である。
+        \end{itemize}
+
+        この前提条件の元で、アップカードと手札の合計値からヒットした時とスタンドした時の勝率から導出される。具体的には以下のような手順によって導出する。
+        \begin{enumerate}
+            \item プレイヤーの手札の合計値とアップカードの組み合わせごとにヒットした場合の勝率とスタンドした場合の勝率を求める
+            \item ヒットした場合の勝率からスタンドした場合の勝率を引き、その差を求める
+            \item 求めた差が0以上であった場合はヒット、0未満であった場合はスタンドが有効であるとする
+        \end{enumerate}
+
+        ベーシックストラテジーの導出に移る前に以下のような定義を行う。
+        \begin{itemize}
+            \item[] x: プレイヤーに最初に配られた2枚のカードの合計値 \((x < 21)\)
+            \item[] D: アップカード
+            \item[] M(D): ディーラーのアップカードによるプレイヤーがスタンドできる最低の手札の合計値
+            \item[] J: プレイヤーが1回ヒットした後の最終的な手札の合計値
+            \item[] T: ディーラーの最終的な手札の合計値 (\(T \geq 17\))
+            \item[] \(E_{d,x}\): プレイヤーの手札の合計値がxの時にヒットした場合の勝率
+            \item[] \(E_{s,x}\): プレイヤーの手札の合計値がxの時にスタンドした場合の勝率
+            \item[] \(P(Y)\): 式Yが成立する確率
+        \end{itemize}
+
+        まず\(E_{s,x}\)について考える。\(E_{s,x}\)とはプレイヤーの手札の合計値がxである時にスタンドした場合の勝率である。つまり、\(T > 21 \)または\(T < x\)の時、プレイヤーはxでスタンドした場合、そのゲームに勝利し、\(x < T \leq 21\)の時、プレイヤーはxでスタンドした場合、そのゲームに敗北する。また、\(T = x\)の時は引き分けとなり、xでスタンドした場合利得は0である。これらのことから\(E_{s,x}\)は以下のような式によって表せる。
+        \begin{displaymath}
+            \begin{split}
+                E_{s,x} = &P(T > 21) + P(T < x) - P(x < T \leq 21)\\
+                &= 2P(T > 21) + 2P(T < x) + P(T = x) - 1
+            \end{split}
+        \end{displaymath}
+        
+        次に\(E_{d,x}\)について考える。\(E_{d,x}\)とはプレイヤーの手札の合計値がxである時にヒットした場合の勝率である。手札の合計値がxでヒットした場合は以下の3つの場合に分けられる。
+        \begin{enumerate}
+            \item \(J < 17\)\\
+                Tは常に17以上であるから、この時にプレイヤーが勝利する期待値は以下のように表せる。
+                $$P(T > 21) - (1 - P(T > 21)) = 2P(T > 21) - 1$$
+            \item \(17 \leq J \leq 21\)\\
+                同様にこの時にプレイヤーが勝利する期待値は、
+                $$P(T > 21) + P(T < J) - P(J < T \leq 21)$$
+                となる。
+            \item \(J > 21\)\\
+                この時、Tがどのような値でもプレイヤーは敗北する。つまり期待値は-1となる。
+        \end{enumerate}
+
+        以上のことから\(E_{d,x}\)は、
+        \begin{displaymath}
+            \begin{split}
+                E_{d,x} = &P(J < 17)(2P(T > 21) - 1) - P(J > 21)\\
+                &+ \sum_{j=17}^{21}P(J = j)(P(T > 21) + P(T < j) - P(j < T \leq 21))
+            \end{split}
+        \end{displaymath}
+        となる。
+        ここで\(E_{d,x}\)の第3項の部分に注目する。第3項は、Tは常に17以上\((T > 17)\)であること、Jは17以上21以下\((17 \leq J \leq 21)\)であることから以下のような変形を行うことができる。
+        \begin{displaymath}
+            \begin{split}
+                \sum_{j=17}^{21}&P(J = j)(P(T > 21) + P(T < j) - P(j < T \leq 21)\\
+                &= \sum_{j=17}^{21}P(J = j)(P(T > 21) + P(T < j) - (1 - P(T > 21) - P(T < j) - P(T = j))\\
+                &= \sum_{j=17(}^{21}P(J = j)(2P(T > 21) - 1 + 2P(T < j) + P(T = j))\\
+                &= (2P(T > 21) - 1)\sum_{j=17(}^{21}P(J = j) + 2\sum_{j=17(}^{21}P(J = j)P(T < j) + \sum_{j=17(}^{21}P(J = j)P(T = j)\\
+                &= (2P(T > 21) - 1)\sum_{j=17(}^{21}P(J = j) + 2P(T < J \leq 21) + P(T = J \leq 21)\\
+            \end{split}
+        \end{displaymath}
+
+        また、\(P(J < 17)\) + \(\sum_{j=17}^{21}P(J = j) = P( J \leq 21)\)と書けるため、\(E_{d,x}\)は、
+        \begin{displaymath}
+            \begin{split}
+                E_{d,x} &= P(J < 17)(2P(T > 21) - 1) - P(J > 21)\\
+                        &\quad+ (2P(T > 21) - 1)\sum_{j=17(}^{21}P(J = j) + 2P(T < J \leq 21) + P(T = J \leq 21)\\
+                        &= (2P(T > 21) - 1)(P(J < 17) + \sum_{j=17}^{21}P(J = j)) - P(J > 21)+ 2P(T < J \leq 21) + P(T = J \leq 21)\\
+                        &= (2P(T > 21) - 1)P(J \leq 21) - P(J > 21) + 2P(T < J \leq 21) + P(T = J \leq 21)\\
+                        &= (2P(T > 21) -1)(1 - P(J > 21)) - P(J > 21) + 2P(T < J \leq 21) + P(T = H \leq 21)\\
+            \end{split}
+        \end{displaymath}
+        となる。したがって、行動決定式\(E_{d,x} - E_{s,x}\)は、
+        \begin{displaymath}
+            \begin{split}
+                E_{d,x} - E_{s,x} &= (2P(T > 21) -1)(1 - P(J > 21)) - P(J > 21) + 2P(T < J \leq 21) + P(T = H \leq 21)\\
+                &\quad- ( 2P(T > 21) + 2P(T < x) + P(T = x) - 1)\\
+                &= -2P(T < x) - P(T = x) -2P(T > 21)P(J > 21) + 2P(T < J \leq 21) + P(T = J \leq 21)\\
+            \end{split}
+        \end{displaymath}
+        となる。
+        \bunseki{※鳥谷 航大}
+    \subsection{ベーシックストラテジーの導出}
+        ベーシックストラテジーの導出を行う上で、xについて以下の3つの場合分けを行う。
+        \begin{eqnarray}
+            x<12\\
+            12\leq x\leq 16\\
+            x>16
+        \end{eqnarray}
+        \subsubsection{}
+            $x<12$のとき、$T \geq 17$であるから、$P(T < x)$と$P(T = x)$は0である。同様に、$P(J > 21)$も0であるから、$E_{d,x} - E_{s,x}$は常に0以上($E_{d,x} - E_{s,x} \geq 0$)となる。よって$x < 12$において、プレイヤーの行動は全てヒットとなる。
+        \subsubsection{}
+            $12\leq x \leq 16$のとき、1.4.1と同様に$P(T < x)$と$P(T = x)$は0である。この時の行動決定式$E_{d,x} - E_{s,x}$は以下のように書ける。
+            \begin{displaymath}
+                E_{d,x} - E_{s,x} = -2P(T>21)P(J>21) + \sum_{t-17}^{21}P(T=t)(2P(t<J\leq21) + P(J=t))
+            \end{displaymath}
+            また、プレイヤーが引いてくるカードの確率は全て同じであるため、
+            \begin{eqnarray}
+                \begin{split}
+                    &P(J-x=10)=4/13 \notag\\
+                    &P(J-x=i)=1/13 \quad i=2,3,...,9,(1,11) \notag
+                \end{split}
+            \end{eqnarray}
+            と考えられる。したがって、
+            \begin{displaymath}
+                \begin{split}
+                    &P(J>21)=\frac{1}{13}(x-8)\\
+                    &P(T<J\leq21)=\frac{1}{13}(21-T)\\
+                    &P(J=T)=\frac{1}{13}\\
+                \end{split}
+            \end{displaymath}
+                とそれぞれ表すことができるため、$E_{d,x} - E_{s,x}$は以下のように書ける。
+            \begin{displaymath}
+                E_{d,x} - E_{s,x} = -\frac{2}{13}(x-8)P(T>21)+\frac{1}{13}\sum_{t-17}^{21}P(T=t)(43-2t)
+            \end{displaymath}
+            ここで$x=x_0$として、$E_{d,x_0} - E_{s,x_0}=0$の時を考える。この時、$x_0$は、
+            \begin{displaymath}
+                \begin{split}
+                    x_0&=8+\frac{1}{2}\frac{\sum_{t=17}^{21}(43-2t)P(T=t)}{P(T>21)}\\
+                \end{split}
+            \end{displaymath}
+            となる。このことから、$12\leq x\leq 16$のとき、$M(D)=[x_0]+1$となる。
+        \subsubsection{}
+            $x>16$のとき、まず、$x=17$を考える。この時$E_{d,x}-E_{s,x}$は、
+            \begin{displaymath}
+                \begin{split}
+                    E_{d,x}-E_{s,x}=-\frac{18}{13}P(T>21)-\frac{5}{13}P(T=17)+\frac{1}{13}\sum_{t=18}^21(43-2t)P(T=t)
+                \end{split}
+            \end{displaymath}
+            となる。この時$E_{d,x}-E_{s,x}$は、全ての$D$に対して常に0未満となる。つまり、$E_{d,x}-E_{s,x}<0$であるから、$M(D)\leq 16$となる。
+        
+        以上のことから、ベーシックストラテジーは以下のような戦略表となる。
+        \begin{table}[h]
+        \caption{ベーシックストラテジーの戦略表}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+      & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & A \\ \hline
+17以上  & S & S & S & S & S & S & S & S & S  & S \\ \hline
+13〜16 & S & S & S & S & S & H & H & H & H  & H \\ \hline
+12    & H & H & S & S & S & H & H & H & H  & H \\ \hline
+11以下  & H & H & H & H & H & H & H & H & H  & H \\ \hline
+        \end{tabular}
+        \end{table}
+        \bunseki{※鳥谷 航大}
+    

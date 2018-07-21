@@ -1,0 +1,69 @@
+\section{戦略の検証}
+
+Thorp氏によって考案されたベーシックストラテジーについて検証を行う.
+ベーシックストラテジーの性能評価のために比較対象として6つの戦略を考えた.
+比較対象となる戦略は次の通りである.
+
+\begin{itemize}
+  \item ベーシックストラテジー改変1
+  \item ベーシックストラテジー改変2
+  \item プレイヤーの合計値が15以上になるまでヒット
+  \item プレイヤーの合計値が16以上になるまでヒット
+  \item プレイヤーの合計値が17以上になるまでヒット
+  \item プレイヤーの合計値が18以上になるまでヒット
+\end{itemize}
+
+以上の6つの戦略について,これから一つ一つ詳細に説明する.
+\bunseki{※米村祥裕}
+
+\subsection{ベーシックストラテジー改変1}
+ベーシックストラテジーはブラックジャックにおける有効な戦略の一つである.しかし
+戦略の表に注目すると,表の複雑性を考えたときに変更の余地があると考えた.
+戦略表においてプレイヤーの合計値が12の行に注目する.ディーラーのアップカードが2,3の時は
+Sとなっているが,その後アップカードが4,5,6の時はH,アップカードが7,8,9,10,Aの時はHとなっており,
+Hに挟まれてSが存在している.表を覚えることを考えると,同じ行の中で変化が少ない方がよいと考えられる.
+そのため,ベーシックストラテジー改変1では表\ref{bschange1}に示すように,プレイヤーの合計値が12,ディーラーのアップ
+カードが4,5,6の時の戦略をSに変更した.
+
+\begin{table}[htbp]
+  \centering
+  \caption{ベーシックストラテジー改変1\label{bschange1}}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multicolumn{2}{|c|}{} & \multicolumn{10}{|c|}{ディーラーのアップカード} \\ \hline
+    \multicolumn{2}{|c|}{} & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & A \\ \hline
+    手札の合計 & 19以上 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 18 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 17 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 16 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 15 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 13\~ 14 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 12 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 11以下 & H & H & H & H & H & H & H & H & H & H \\ \hline
+  \end{tabular}
+\end{table}
+
+\subsection{ベーシックストラテジー改変2}
+
+\begin{table}[htbp]
+  \centering
+  \caption{ベーシックストラテジー改変2\label{bschange2}}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multicolumn{2}{|c|}{} & \multicolumn{10}{|c|}{ディーラーのアップカード} \\ \hline
+    \multicolumn{2}{|c|}{} & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & A \\ \hline
+    手札の合計 & 19以上 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 18 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 17 & S & S & S & S & S & S & S & S & S & S \\ \cline{3-12}
+              & 16 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 15 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 13\~ 14 & S & S & S & S & S & H & H & H & H & H \\ \cline{3-12}
+              & 12 & H & H & H & H & H & H & H & H & H & H \\ \cline{3-12}
+              & 11以下 & H & H & H & H & H & H & H & H & H & H \\ \hline
+  \end{tabular}
+\end{table}
+
+\subsection{プレイヤーの合計値が15以上になるまでヒット}
+\subsection{プレイヤーの合計値が16以上になるまでヒット}
+\subsection{プレイヤーの合計値が17以上になるまでヒット}
+\subsection{プレイヤーの合計値が18以上になるまでヒット}

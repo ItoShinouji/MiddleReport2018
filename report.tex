@@ -1,0 +1,129 @@
+% プロジェクト学習中間報告書書式テンプレート ver.1.0 (iso-2022-jp)
+
+% 両面印刷する場合は `openany' を削除する
+\documentclass[11pt,a4paper,oneside]{jsbook}
+
+\usepackage{bm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{blindtext}
+\usepackage{here}
+\usepackage[sectionbib]{chapterbib}
+\usepackage[dvipdfmx]{graphicx}
+
+
+\setcounter{chapter}{1}
+\setcounter{section}{0}
+
+% 報告書提出用スタイルファイル
+%\usepackage[final]{funpro}%最終報告書
+\usepackage[middle]{funpro}%中間報告書
+\thisYear{2018}
+% プロジェクト名
+\jProjectName{ディーラーをやっつけろ!}
+\eProjectName{Beat the dealer!}
+\ProjectNumber{3}
+\ProjectLeader{1014207}{菱田美紗紀}{Misaki~Hishida}
+% メンバー数
+\SumOfMembers{10}
+% グループメンバ
+\GroupMember  {1}{1220000}{函館太郎}{Taro~Hakodate}
+\GroupMember  {2}{1230000}{函館花子}{Hanako~Hakodate}
+\GroupMember  {3}{1240000}{北海太郎}{Taro~Hokkai　}
+\GroupMember  {4}{1250000}{北海花子}{Hanako~Hokkai}
+\GroupMember  {5}{1260000}{未来花子}{Hanako~Mirai}
+\GroupMember  {6}{1270000}{未来一郎}{Ichiro~Mirai}
+\GroupMember  {7}{1280000}{未来二朗}{Jiro~Mirai　}
+\GroupMember  {8}{1290000}{未来三郎}{Saburo~Mirai}
+\GroupMember  {9}{1290000}{未来敬祐}{Keisuke~Mirai}
+\GroupMember  {10}{1290000}{未来敬祐}{Keisuke~Mirai}
+% 指導教員
+\jadvisor{指導刷蔵,指導刷子,副出刷子,福田刷男}
+% 複数人数いる場合はカンマ(,)で区切る。カンマの前後に空白は入れない。
+\eadvisor{Suruo~Shido,Suruko~Shido,Suruko~Hukude,Suruo~Hukude}
+
+% 論文提出日
+\jdate{2004年7月26日}
+\edate{July~26, 2004}
+%\renewcommand{\thechapter}{第\arabic{chapter}章}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+
+% 画像ファイル (EPS, EPDF, PNG) を読み込むために
+\usepackage[dvipdfmx]{graphicx,color}
+\pagestyle{empty}
+\advance\textheight\headheight \headheight=0pt
+\advance\textheight\headsep    \headsep=0pt
+\advance\textheight\footskip   \footskip=0pt
+\textheight=738truept
+\advance\textwidth\marginparsep \marginparsep=0pt
+\advance\textwidth\marginparwidth \marginparwidth=0pt
+\advance\textwidth\oddsidemargin \oddsidemargin=0pt
+\evensidemargin=\oddsidemargin
+\textwidth=50zw
+\advance\textwidth2zw
+\columnsep=2zw
+\topmargin=-5.4mm
+\oddsidemargin=-7.4mm
+
+\title{ディーラーをやっつけろ}
+
+\begin{document}
+
+\pagenumbering{roman}
+\fontsize{10}{18}\selectfont
+%前付け
+\frontmatter
+
+% 和文概要
+\begin{jabstract} 
+\ \ 本プロジェクトでは、カジノにおいて最もポピュラーなゲームの一つであるブラックジャックを取り扱っている。ブラックジャックに関する代表的な行動戦略としてベーシックストラテジー、カウンティングというものがある。これらはプレイヤーの期待利得を増大させプレイヤーにとって有利な状況を作り出した。しかしカジノ側の対策によって、戦略を単純に採用し実行することは困難になり、期待利得も減少することになった。そこで我々は既存の戦略と比較して 3つの観点から優れた戦略を見つけ出すことを試みた。1つ目はプレイヤーの利得を既存の戦略に比べて増加させること、2つ目はカジノ側の対策を回避することである。3つ目はプレイヤーが覚えやすく、実行可能なものであることである。\\
+\ \ 戦略を見つけるにあたって、現在までに我々は既存の戦略として最も有名なベーシックストラテジーと呼ばれる戦略についてどの程度確からしく、単純に考えられる他の手法に比べてどの程度プレイヤーに有利なのかを検証した。ブラックジャックのシミュレータを作成し、ゲームを行った。その勝率により戦略の優劣を比較した。このとき、戦略の複雑性を考慮するとベーシックストラテジーは改善の余地があるという結果が得られた。
+% 和文キーワード
+\begin{jkeyword}
+カジノ,\ ブラックジャック,\ ベーシックストラテジー,\ 複雑性
+\end{jkeyword}
+\bunseki{※轟木文弥}
+\end{jabstract}
+
+%英語の概要
+\begin{eabstract} 
+\ \ In this project, we deal with Blackjack, one of the most popular games in the casino. There are also basic strategies and counting as representative behavior strategies concerning blackjack. This has increased the player's expectation gain and created a situation that is also true for the player. It is difficult to easily adopt and execute the strategy by the casino side measures, and the expected value has also been reduced. Then, we tried trying to find a winning strategy from three perspectives compared to existing strategy: one to increase the gain of the target player compared to the existing strategy, two to casino side The third is to make it easy for players to memorize and execute.\\
+\ \ In finding a strategy, we have verified to what extent the strategy called the basic strategy which is most familiar as an existing strategy is confirmed up to now and to what extent it is advantageous to the player compared with other methods which can simply be considered. We made a blackjack simulator and played a game. Based on the winning percentage, we compared the merits of strategies. At this time, considering the complexity of the strategy, the result that the basic strategy has room for improvement was obtained.
+% 英文キーワード
+\begin{ekeyword}
+casino, blackjack, basic strategies, complexity
+\end{ekeyword}
+\bunseki{※轟木文弥}
+\end{eabstract}
+
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\input{./Introduction.tex}
+
+%研究背景に関する項目
+\chapter{研究背景}
+\input{./rule.tex}
+\input{./basicstrategy.tex}
+
+%既存戦略の検証に関する項目
+\input{./verification.tex}
+\input{./simulator.tex}
+\input{./random.tex}
+\input{./statistics.tex}
+\input{./complexity.tex}
+
+%暫定削除予定
+\input{./neuralnetwork.tex}
+\input{./parameter.tex}
+\input{./neuro2.tex}
+\input{./geneticalgorithm.tex}
+
+\input{./evaluation.tex}
+\input{./reference.tex}
+
+\end{document}
