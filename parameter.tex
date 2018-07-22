@@ -34,16 +34,7 @@ $最小二乗和誤差はtとyの差が大きいほど損失関数の値は大�
 E = -\sum_k^n t_k \log y_k
 \end{equation}
 
-こちらもyはニューラルネットワークの出力、tは教師データを表す。
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=7cm]{./figure./graph2_1.png}
-\end{center}
-\caption{交差エントロピー誤差1}
-\end{figure}
-
-グラフは次のようになるが、ここでtは入力データｘが属するクラスの要素のみが1でそれ以外が0という構造をとるものとする。これをone-hot表現という。
+こちらもyはニューラルネットワークの出力、tは教師データを表す。ここでtは入力データｘが属するクラスの要素のみが1でそれ以外が0という構造をとるものとする。これをone-hot表現という。
 
 \[
   \bm{t} = \left(
