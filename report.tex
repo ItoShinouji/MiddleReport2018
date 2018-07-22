@@ -12,43 +12,36 @@
 \usepackage{here}
 \usepackage[sectionbib]{chapterbib}
 \usepackage[dvipdfmx]{graphicx}
-
+\usepackage{funpro}
 
 \setcounter{chapter}{1}
 \setcounter{section}{0}
 
-% 報告書提出用スタイルファイル
-%\usepackage[final]{funpro}%最終報告書
-\usepackage[middle]{funpro}%中間報告書
 \thisYear{2018}
-% プロジェクト名
-\jProjectName{ディーラーをやっつけろ!}
-\eProjectName{Beat the dealer!}
+\jProjectName{ディーラーをやっつけろ! 複雑系の数理とシミュレーション}
+\eProjectName{Beat the dealer! Mathematics of Complex Systems and Simulation.}
 \ProjectNumber{3}
+\jGroupName{グループ~1}
+\eGroupName{Group~1}
 \ProjectLeader{1014207}{菱田美紗紀}{Misaki~Hishida}
-% メンバー数
-\SumOfMembers{10}
-% グループメンバ
-\GroupMember  {1}{1220000}{函館太郎}{Taro~Hakodate}
-\GroupMember  {2}{1230000}{函館花子}{Hanako~Hakodate}
-\GroupMember  {3}{1240000}{北海太郎}{Taro~Hokkai　}
-\GroupMember  {4}{1250000}{北海花子}{Hanako~Hokkai}
-\GroupMember  {5}{1260000}{未来花子}{Hanako~Mirai}
-\GroupMember  {6}{1270000}{未来一郎}{Ichiro~Mirai}
-\GroupMember  {7}{1280000}{未来二朗}{Jiro~Mirai　}
-\GroupMember  {8}{1290000}{未来三郎}{Saburo~Mirai}
-\GroupMember  {9}{1290000}{未来敬祐}{Keisuke~Mirai}
-\GroupMember  {10}{1290000}{未来敬祐}{Keisuke~Mirai}
-% 指導教員
-\jadvisor{指導刷蔵,指導刷子,副出刷子,福田刷男}
-% 複数人数いる場合はカンマ(,)で区切る。カンマの前後に空白は入れない。
-\eadvisor{Suruo~Shido,Suruko~Shido,Suruko~Hukude,Suruo~Hukude}
+\GroupLeader  {1016123}{薩田凱斗}{Kaito~Satta}
+\SumOfMembers{9}
+\GroupMember  {1}{1016007}{柏田輝}{Hikaru~Kashiwada}
+\GroupMember  {2}{1016042}{尾崎拓海}{Takumi~Ozaki}
+\GroupMember  {3}{1016078}{伊藤晋之介}{Shinnosuke~Ito}
+\GroupMember  {4}{1016087}{驫木文弥}{Fumiya~Todoroki}
+\GroupMember  {5}{1016118}{葛西隼人}{Hayato~Kasai}
+\GroupMember  {6}{1016175}{柿崎大輝}{Daiki~Kakizaki}
+\GroupMember  {7}{1016184}{鳥谷航大}{Koudai~Toriya}
+\GroupMember  {8}{1016207}{渡邊凛}{Rin~Watanabe}
+\GroupMember  {9}{1016231}{米村祥裕}{Yonemura~Yoshihiro}
+\jadvisor{川越敏司,川口聡,斎藤朝輝}
+\eadvisor{Toshiji~Kawagoe,Satoshi~Kawaguchi,Asaki~Saitou}
+\jdate{2018年7月22日}
+\edate{July~22, 2018}
 
-% 論文提出日
-\jdate{2004年7月26日}
-\edate{July~26, 2004}
-%\renewcommand{\thechapter}{第\arabic{chapter}章}
-\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thechapter}[1]{{\huge 第\arabic{chapter}章\quad #1}}%
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}%
 
 % 画像ファイル (EPS, EPDF, PNG) を読み込むために
 \usepackage[dvipdfmx]{graphicx,color}
@@ -67,10 +60,8 @@
 \topmargin=-5.4mm
 \oddsidemargin=-7.4mm
 
-\title{ディーラーをやっつけろ}
-
 \begin{document}
-
+\maketitle
 \pagenumbering{roman}
 \fontsize{10}{18}\selectfont
 %前付け
@@ -103,27 +94,33 @@ casino, blackjack, basic strategies, complexity
 
 \pagenumbering{arabic}
 
-\input{./Introduction.tex}
-
-%研究背景に関する項目
 \chapter{研究背景}
+\input{Introduction}
 \input{./rule.tex}
 \input{./basicstrategy.tex}
 
 %既存戦略の検証に関する項目
+\chapter{プロジェクトの目的}
+\section{avoid}
+\chapter{戦略の検証}
 \input{./verification.tex}
 \input{./simulator.tex}
 \input{./random.tex}
+\chapter{検証結果}
 \input{./statistics.tex}
 \input{./complexity.tex}
+\chapter{前期活動}
+\chapter{後期活動}
+\chapter{中間発表の評価}
+\input{./evaluation.tex}
+
+\input{./reference.tex}
 
 %暫定削除予定
-\input{./neuralnetwork.tex}
-\input{./parameter.tex}
-\input{./neuro2.tex}
-\input{./geneticalgorithm.tex}
+%\input{./neuralnetwork.tex}
+%\input{./parameter.tex}
+%\input{./neuro2.tex}
+%\input{./geneticalgorithm.tex}
 
-\input{./evaluation.tex}
-\input{./reference.tex}
 
 \end{document}

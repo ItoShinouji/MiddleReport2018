@@ -95,8 +95,8 @@
    \gdef\@eProjectName{#2}%
 }
 \def\@@@eProjectName#1{\gdef\@eProjectName{#1}}
-%\def\jGroupName#1{\gdef\@jGroupName{#1}}
-%def\eGroupName#1{\gdef\@eGroupName{#1}}
+\def\jGroupName#1{\gdef\@jGroupName{#1}}
+\def\eGroupName#1{\gdef\@eGroupName{#1}}
 \def\ProjectNumber#1{\gdef\@ProjectNumber{#1}}
 \def\jadvisor#1{\gdef\@jadvisor{#1}}
 \def\eadvisor#1{\gdef\@eadvisor{#1}}
@@ -128,8 +128,8 @@
   % プロジェクト名
   \global\let\jProjectName\relax
   \global\let\@jProjectName\@empty
-  \global\let\eProjectName\relax
-  \global\let\@eProjectName\@empty
+  %\global\let\eProjectName\relax
+  %\global\let\@eProjectName\@empty
   % 短い欧文のプロジェクト名はヘッダーに使用するので開放しない
   % \ud{2004/11/25}
   %\global\let\short@eProjectName\@empty
@@ -139,9 +139,9 @@
   \global\let\eGroupName\relax
   \global\let\@eGroupName\@empty
   % プロジェクト番号\ud{2004/07/27}
-  \global\let\ProjectNumber\relax
+  %\global\let\ProjectNumber\relax
   % こちらもヘッダーに使用する\ud{2004/11/25}
-  \global\let\@ProjectNumber\@empty
+  %\global\let\@ProjectNumber\@empty
   % 指導教員
   \global\let\jadvisor\relax
   \global\let\@jadvisor\@empty
@@ -217,7 +217,7 @@
     \vfil\null%
   \end{titlepage}%
   \endgroup
-  \setcounter{footnote}{1}%
+  \setcounter{footnote}{0}%
   \reset@title% ここでレジスタの開放
   }%
 \setcounter{tocdepth}{2}
@@ -314,11 +314,10 @@
   \pagenumbering{arabic}%
 }
 \pagestyle{plainfront}
-\def\bunseki#1{
-  \begin{flushright}
-    \mbox{（文責:~#1）}
-  \end{flushright}
-}
+\def\bunseki#1{%
+  \begin{flushright}%
+    \mbox{（文責:~#1）}%
+\end{flushright}}%
 \newcommand{\qu}[1]{`#1'}
 \newcommand{\qq}[1]{``#1''}
 \newcommand{\yo}[1]{「#1」}
